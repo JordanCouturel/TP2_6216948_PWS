@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TP2_6216948_PWS.Models;
-using static Humanizer.In;
 
 namespace TP2_6216948_PWS.Data
 {
