@@ -13,6 +13,7 @@ namespace TP2_6216948_PWS.Models
         public string Pays { get; set; }
        
         //prop nav
+
         public virtual Team Team { get; set; }
     }
 }

@@ -11,7 +11,7 @@ namespace TP2_6216948_PWS.Models
 
         public int Age { get; set; }
 
-        public virtual Team Equipe { get; set; }
+        public virtual Team? Equipe { get; set; }
 
     }
 }
