@@ -15,11 +15,14 @@ builder.Services.AddDbContext<TP2DbContext>(options =>
 
 
 builder.Services.AddControllers();
+//builder.Services.AddControllersWithViews()
+//    .AddNewtonsoftJson(options =>
+//    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+//);
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c=>{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebAPItp", Version = "v1" });
-});
+builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddCors(options =>
@@ -30,6 +33,8 @@ builder.Services.AddCors(options =>
         builder.AllowAnyMethod();
         builder.AllowAnyHeader();
     });
+
+
 });
 
 var app = builder.Build();
@@ -39,8 +44,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(c=>c.SwaggerEndpoint("/swagger/v1/swagger.json","WebAPItp v1"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TP2_6216948_BD"));
 }
+
 
 app.UseCors("Allow all");
 
