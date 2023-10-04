@@ -25,10 +25,7 @@ namespace TP2_6216948_PWS.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Arena>>> GetArenas()
         {
-          if (_context.Arenas == null)
-          {
-              return NotFound();
-          }
+        
             return await _context.Arenas.ToListAsync();
         }
 
