@@ -1,0 +1,19 @@
+
+
+
+<div *ngFor="let leagues of service.Leagues">
+  
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{leagues.name}}</h5>
+      <p class="card-text">ID:  {{leagues.id}}</p>
+      <p class="card-text">Logo: {{leagues.logo}} </p>
+      
+
+    </div>
+  </div>
+</div>
+
+
+<button (click)="GetSpecificLeague(2)">GetSpecificLeagues</button>
+<button (click)="GetAllLeagues()">GetAllLeagues</button>
