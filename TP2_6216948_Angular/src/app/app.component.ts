@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Injectable} from '@angular/core';
-import { ServiceRequetesService } from 'src/Services/LeaguesService';
+import { ServiceRequetesService } from 'src/Services/Leagues.Service';
 
 @Component({
   selector: 'app-root',

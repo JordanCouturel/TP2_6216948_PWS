@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TP2_6216948_PWS.Data;
 
@@ -10,9 +11,10 @@ using TP2_6216948_PWS.Data;
 namespace TP2_6216948_PWS.Migrations
 {
     [DbContext(typeof(TP2DbContext))]
-    partial class TP2DbContextModelSnapshot : ModelSnapshot
+    [Migration("20231011185108_ModifDonnéesPourPhotos")]
+    partial class ModifDonnéesPourPhotos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

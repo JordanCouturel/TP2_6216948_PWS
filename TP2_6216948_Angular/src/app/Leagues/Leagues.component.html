@@ -1,19 +1,25 @@
 
-
-
-<div *ngFor="let leagues of service.Leagues">
-  
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">{{leagues.name}}</h5>
-      <p class="card-text">ID:  {{leagues.id}}</p>
-      <p class="card-text">Logo: {{leagues.logo}} </p>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+      <th>Logo</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let leagues of service.Leagues">
+      <td>{{leagues.name}}</td>
+      <td>{{leagues.id}}</td>
+      <td>
+        <img style="height: 120px; width: 120px;" src="assets/Images/{{leagues.logo}}" alt="Logo">
+      </td>
       
+        <td><button [routerLink]="['/Teams', leagues.id]" (click)="GetTeamsByID(leagues.id)" class="btn btn-danger">Voir les équipes</button></td>
+    
+    </tr>
+  </tbody>
+</table>
 
-    </div>
-  </div>
-</div>
 
-
-<button (click)="GetSpecificLeague(2)">GetSpecificLeagues</button>
-<button (click)="GetAllLeagues()">GetAllLeagues</button>
