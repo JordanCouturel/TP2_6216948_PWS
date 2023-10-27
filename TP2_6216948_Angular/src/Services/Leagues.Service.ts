@@ -24,7 +24,7 @@ league?:League;
  }
 
   getAllLeagues(){
-   return this.http.get<any>('https://localhost:7161/api/Leagues').subscribe(x=>{
+   return this.http.get<any>('http://localhost:7161/api/Leagues').subscribe(x=>{
    
     
     const LeagueFromResponse=x;
@@ -46,14 +46,14 @@ league?:League;
 
 
   getSpecificLeague(number:number){
-    this.http.get<any>('https://localhost:7161/api/Leagues/'+ number );
+    this.http.get<any>('http://localhost:7161/api/Leagues/'+ number );
     
   }
 
 
   AddLeague(LeagueACreer:League): Observable<League>{
 
-    return this.http.post<League>('https://localhost:7161/api/Leagues', LeagueACreer)
+    return this.http.post<League>('http://localhost:7161/api/Leagues', LeagueACreer)
    
   }
 
@@ -62,13 +62,13 @@ league?:League;
    DeleteLeague(leagueId:number){
    
 
-     this.http.get<any>('https://localhost:7161/api/Leagues/'+ leagueId ).subscribe(x=>{
+     this.http.get<any>('http://localhost:7161/api/Leagues/'+ leagueId ).subscribe(x=>{
       this.league= new League(x.id,x.name,x.logo,x.team,x.league);
       console.log(this.league)
     });
 
     if(this.league?.team.length===0){
-      return this.http.delete<League>('https://localhost:7161/api/Leagues/' + leagueId)
+      return this.http.delete<League>('http://localhost:7161/api/Leagues/' + leagueId)
 
     }
     else{

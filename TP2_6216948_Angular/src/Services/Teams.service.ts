@@ -26,7 +26,7 @@ ngOnInit(): void {
 }
 
 GetTeamByID(leagueID:number){
-  this.http.get<any>('https://localhost:7161/api/Leagues/'+leagueID).subscribe(x=>{
+  this.http.get<any>('http://localhost:7161/api/Leagues/'+leagueID).subscribe(x=>{
 
   const TeamsFromResponse=x.teams
 
