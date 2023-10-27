@@ -1,0 +1,59 @@
+<div *ngIf="!addLeagueActve" class="card-container">
+  <button (click)="changeOnClick()">+ Ajouter une league</button>
+</div>
+
+<div *ngIf="addLeagueActve" class="card-container">
+  <button (click)="changeOnClick()">^ Ajouter une league</button>
+
+  <div class='formulaireAdd'>
+      <form #formAddLeague="ngForm" (ngSubmit)="onSubmit()">
+
+          <label for="leagueNom">Nom de la league :</label>
+          <br>
+          <input type="text" name="leagueNom" id="leagueNom" [(ngModel)]="addLeagueNom" required>
+          <br>
+          <label for="leagueLogo">Logo de la league :</label>
+          <br>
+          <textarea name="leagueLogo" id="leagueLogo" [(ngModel)]="addLeagueLogo" required style="width: 90%;"></textarea>
+          <br>
+          <button [disabled]="addLeagueNom == ''" type="submit">Envoyer</button>
+      </form>
+  </div>
+</div>
+
+
+
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>ID</th>
+      <th>Logo</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let leagues of service.Leagues">
+      <td>{{leagues.name}}</td>
+      <td>{{leagues.id}}</td>
+      <td>
+        <img style="height: 120px; width: 120px;" src="assets/Images/{{leagues.logo}}" alt="Logo">
+      </td>
+      
+        <td><button [routerLink]="['/Teams', leagues.id]" (click)="GetTeamsByID(leagues.id)" class="btn btn-danger">Voir les équipes</button></td>
+      <td><button class="btn btn-danger" (click)="setLeagueId(leagues.id)" (click)="DeleteLeague()">Supprimer</button></td>
+    
+    </tr>
+  </tbody>
+</table>
+
+
+
+
+
+
+
+
+
