@@ -25,20 +25,20 @@ namespace TP2_6216948_PWS.Data
                 {
                     Id = 1,
                     Name = "Ligue Nationale de Hockey ",
-                    Logo = "/Assets/Images/NHL.png",
+                    Logo = "nhl.png",
 
                 },
                 new League
                 {
                     Id = 2,
                     Name = "Ligue de Hockey d'Ontario ",
-                    Logo = "/Assets/Images/OHL.png"
+                    Logo = "OHL.jpg"
                 },
                 new League
                 {
                     Id = 3,
                     Name = "Ligue de hockey junior majeur du Québec ",
-                    Logo = "/Assets/Images/lhjmq.png"
+                    Logo = "lhjmq.png"
                 }
 
             ); ;
