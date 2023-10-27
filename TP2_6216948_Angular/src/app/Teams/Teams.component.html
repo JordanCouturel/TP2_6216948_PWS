@@ -1,4 +1,4 @@
-
+<div *ngIf="service.Teams[0]!=null">
 <div *ngFor="let team of service.Teams">
   <div class="card">
     <div class="card-body">
@@ -8,4 +8,9 @@
       <p class="card-text">Commanditaire: {{team.commanditaire}} </p>
     </div>
   </div>
+</div>
+</div>
+
+<div *ngIf="service.Teams[0]==null">
+      <h1 style="color: red;">Cette league ne contient aucune équipes</h1>
 </div>

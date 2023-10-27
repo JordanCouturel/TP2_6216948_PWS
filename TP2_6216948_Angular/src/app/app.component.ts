@@ -17,6 +17,9 @@ export class AppComponent {
     }
 
 
+    GetAllLeagues(){
+      this.service.getAllLeagues();
 
+     }
 
 }

@@ -12,7 +12,7 @@ import { HomeComponent } from './Home/Home.component';
 
 
 @NgModule({
-  declarations: [			
+  declarations: [				
     AppComponent,
       LeaguesComponent,
       TeamsComponent,
@@ -22,11 +22,13 @@ import { HomeComponent } from './Home/Home.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     RouterModule,
     RouterModule.forRoot([
       {path:'',component:AppComponent},
       {path:'ligues',component:LeaguesComponent},
       {path:'Teams/:leagueId',component:TeamsComponent},
+    
 
     ]),
 

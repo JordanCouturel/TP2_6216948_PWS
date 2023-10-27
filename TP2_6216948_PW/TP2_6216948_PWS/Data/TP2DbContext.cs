@@ -39,7 +39,15 @@ namespace TP2_6216948_PWS.Data
                     Id = 3,
                     Name = "Ligue de hockey junior majeur du Québec ",
                     Logo = "lhjmq.png"
+                },
+                new League
+                {
+                    Id=4,
+                    Name="Ligue de hockey sans equipes",
+                    Logo="photoinexistante.png"
                 }
+
+
 
             ); ;
 

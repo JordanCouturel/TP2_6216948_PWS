@@ -23,7 +23,6 @@ export class TeamsComponent implements OnInit {
 
   GetTeamByID(leagueID:number){
   this.service.GetTeamByID(leagueID) 
-  console.log("allo",this.Teams)
   }
  
 }
