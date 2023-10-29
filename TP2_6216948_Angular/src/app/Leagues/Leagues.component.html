@@ -5,7 +5,7 @@
 <div style="margin-left: 50px;" *ngIf="addLeagueActve" class="card-container">
   <button (click)="changeOnClick()">^ Ajouter une ligue</button>
 
-  <div class='formulaireAdd'>
+  <div>
       <form #formAddLeague="ngForm" (ngSubmit)="onSubmit()">
 
           <label for="leagueNom">Nom de la ligue :</label>
@@ -22,24 +22,7 @@
 </div>
 
 
-<div style="margin-left: 50px;" *ngIf="addLeagueActve" class="card-container">
-  <button (click)="changeOnClick()">^ Modifier une ligue</button>
 
-  <div class='formulaireAdd'>
-      <form #formModifyLeague="ngForm" (ngSubmit)="onSubmit()">
-
-          <label for="leagueNom">Nom de la ligue :</label>
-          <br>
-          <input type="text" name="leagueNom" id="leagueNom" [(ngModel)]="addLeagueNom" required>
-          <br>
-          <label for="leagueLogo">Logo de la ligue :</label>
-          <br>
-          <textarea name="leagueLogo" id="leagueLogo" [(ngModel)]="addLeagueLogo" required style="width: 90%;"></textarea>
-          <br>
-          <button [disabled]="addLeagueNom == ''" type="submit">Envoyer</button>
-      </form>
-  </div>
-</div>
 
 
 
@@ -53,6 +36,7 @@
       <th>Logo</th>
       <th>Voir</th>
       <th>Supprimer</th>
+      <th>Modifier</th>
 
     </tr>
   </thead>
@@ -66,7 +50,9 @@
       
         <td><button [routerLink]="['/Teams', leagues.id]" (click)="GetTeamsByID(leagues.id)" class="btn btn-danger">Voir les équipes</button></td>
       <td><button class="btn btn-danger"  (click)="DeleteLeague(leagues.id)">Supprimer</button></td>
-    
+      <td><button class="btn btn-danger" (click)="goToModifyLeague(leagues.id)">Modifier</button></td>
+
+ 
     </tr>
   </tbody>
 </table>

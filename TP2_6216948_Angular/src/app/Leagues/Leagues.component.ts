@@ -13,13 +13,18 @@ import { Observable } from 'rxjs';
 export class LeaguesComponent implements OnInit {
 
   constructor(@Inject(ServiceRequetesService) public service:ServiceRequetesService,public service2:TeamsService, public router:Router) { }
-leagues:any[]=[]
+leagues:any[]=[];
+
 addLeagueActve:boolean=false;
+
 leagueAcreer?: League;
 LeagueAcreer?:League;
 
 addLeagueNom:string="";
 addLeagueLogo:string="";
+
+
+
 
 leagueId?: number;
 league: League | null = null;
@@ -34,7 +39,7 @@ ngOnInit(): void {
      }
 
 GetSpecificLeague(id:number){  
-  this.service.getSpecificLeague(id)
+   this.service.getSpecificLeague(id);
 }
 
 
@@ -50,6 +55,7 @@ GetTeamsByID(leagueID:number){
     })
   }
  
+ 
 
   public changeOnClick(): void{
     this.addLeagueActve = !this.addLeagueActve;
@@ -58,8 +64,11 @@ GetTeamsByID(leagueID:number){
   async onSubmit(){
     this.LeagueAcreer = new League(0, this.addLeagueNom, this.addLeagueLogo);
     await this.addLeague(this.LeagueAcreer);
-  }
 
+    this.addLeagueNom="";
+    this.addLeagueLogo="";
+    this.addLeagueActve = false;
+  }
 
 
 
@@ -80,5 +89,13 @@ GetTeamsByID(leagueID:number){
   setLeagueId(id: number) {
     this.leagueId = id;
   }
+
+
+  goToModifyLeague(id: number): void {
+    this.router.navigate(['ModifierLigue', id]);
+  }
+
+
+
 
 }

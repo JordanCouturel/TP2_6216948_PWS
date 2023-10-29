@@ -10,16 +10,17 @@ import { TeamsComponent } from './Teams/Teams.component';
 import { HomeComponent } from './Home/Home.component';
 import { ServiceRequetesService } from 'src/Services/Leagues.Service';
 import { TeamsService } from 'src/Services/Teams.service';
+import { ModifierLigueComponent } from './ModifierLigue/ModifierLigue.component';
 
 
 
 @NgModule({
-  declarations: [				
+  declarations: [					
     AppComponent,
       LeaguesComponent,
       TeamsComponent,
       HomeComponent,
-      
+      ModifierLigueComponent
    ],
   imports: [
     BrowserModule,
@@ -31,6 +32,7 @@ import { TeamsService } from 'src/Services/Teams.service';
       {path:'',component:AppComponent},
       {path:'ligues',component:LeaguesComponent},
       {path:'Teams/:leagueId',component:TeamsComponent},
+      { path: 'ModifierLigue/:id', component: ModifierLigueComponent },
     
 
     ]),
