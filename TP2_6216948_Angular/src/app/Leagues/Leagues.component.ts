@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { League } from 'src/Models/League';
 import { ServiceRequetesService } from 'src/Services/Leagues.Service';
 import { TeamsService } from 'src/Services/Teams.service';
-
+import { Inject } from '@angular/core';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-Leagues',
   templateUrl: './Leagues.component.html',
@@ -11,14 +12,19 @@ import { TeamsService } from 'src/Services/Teams.service';
 })
 export class LeaguesComponent implements OnInit {
 
-  constructor(public service:ServiceRequetesService,public service2:TeamsService, public router:Router) { }
-leagues:any[]=[]
+  constructor(@Inject(ServiceRequetesService) public service:ServiceRequetesService,public service2:TeamsService, public router:Router) { }
+leagues:any[]=[];
+
 addLeagueActve:boolean=false;
+
 leagueAcreer?: League;
 LeagueAcreer?:League;
 
 addLeagueNom:string="";
 addLeagueLogo:string="";
+
+
+
 
 leagueId?: number;
 league: League | null = null;
@@ -33,7 +39,7 @@ ngOnInit(): void {
      }
 
 GetSpecificLeague(id:number){  
-  this.service.getSpecificLeague(id)
+   this.service.getSpecificLeague(id);
 }
 
 
@@ -49,6 +55,7 @@ GetTeamsByID(leagueID:number){
     })
   }
  
+ 
 
   public changeOnClick(): void{
     this.addLeagueActve = !this.addLeagueActve;
@@ -57,18 +64,24 @@ GetTeamsByID(leagueID:number){
   async onSubmit(){
     this.LeagueAcreer = new League(0, this.addLeagueNom, this.addLeagueLogo);
     await this.addLeague(this.LeagueAcreer);
+
+    this.addLeagueNom="";
+    this.addLeagueLogo="";
+    this.addLeagueActve = false;
   }
 
 
 
-  async DeleteLeague() {
-    if (this.leagueId != null) {
-
-       await this.service.DeleteLeague(this.leagueId);
-
-       this.router.navigate(['/ligues']);
-       this.router.navigate(['/ligues']);
-    }
+  DeleteLeague(leagueId: number): void {
+    this.service.DeleteLeague(leagueId).subscribe(
+      (result) => {
+        console.log('Ligue suprimmée avec succès:', result);
+        this.GetAllLeagues();
+      },
+      (error) => {
+        console.error('Une erreur est survenue lors de la supression de la ligue:', error);
+      }
+    );
   }
 
 
@@ -76,5 +89,13 @@ GetTeamsByID(leagueID:number){
   setLeagueId(id: number) {
     this.leagueId = id;
   }
+
+
+  goToModifyLeague(id: number): void {
+    this.router.navigate(['ModifierLigue', id]);
+  }
+
+
+
 
 }

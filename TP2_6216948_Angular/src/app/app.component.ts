@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Injectable} from '@angular/core';
 import { ServiceRequetesService } from 'src/Services/Leagues.Service';
-
+import { Inject } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,7 +12,7 @@ import { ServiceRequetesService } from 'src/Services/Leagues.Service';
 
 export class AppComponent {
   title = 'TP2_6216948_Angular';
-    constructor(public service:ServiceRequetesService){
+    constructor(@Inject(ServiceRequetesService)public service:ServiceRequetesService){
 
     }
 

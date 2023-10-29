@@ -1,18 +1,18 @@
-<div *ngIf="!addLeagueActve" class="card-container">
-  <button (click)="changeOnClick()">+ Ajouter une league</button>
+<div style="margin-left: 50px; margin-bottom: 30px;" *ngIf="!addLeagueActve" class="card-container">
+  <button  (click)="changeOnClick()">Ajouter une ligue</button>
 </div>
 
-<div *ngIf="addLeagueActve" class="card-container">
-  <button (click)="changeOnClick()">^ Ajouter une league</button>
+<div style="margin-left: 50px;" *ngIf="addLeagueActve" class="card-container">
+  <button (click)="changeOnClick()">^ Ajouter une ligue</button>
 
-  <div class='formulaireAdd'>
+  <div>
       <form #formAddLeague="ngForm" (ngSubmit)="onSubmit()">
 
-          <label for="leagueNom">Nom de la league :</label>
+          <label for="leagueNom">Nom de la ligue :</label>
           <br>
           <input type="text" name="leagueNom" id="leagueNom" [(ngModel)]="addLeagueNom" required>
           <br>
-          <label for="leagueLogo">Logo de la league :</label>
+          <label for="leagueLogo">Logo de la ligue :</label>
           <br>
           <textarea name="leagueLogo" id="leagueLogo" [(ngModel)]="addLeagueLogo" required style="width: 90%;"></textarea>
           <br>
@@ -25,13 +25,19 @@
 
 
 
+
+
+
 <table class="table">
   <thead>
     <tr>
       <th>Name</th>
       <th>ID</th>
       <th>Logo</th>
-      <th>Action</th>
+      <th>Voir</th>
+      <th>Supprimer</th>
+      <th>Modifier</th>
+
     </tr>
   </thead>
   <tbody>
@@ -43,8 +49,10 @@
       </td>
       
         <td><button [routerLink]="['/Teams', leagues.id]" (click)="GetTeamsByID(leagues.id)" class="btn btn-danger">Voir les équipes</button></td>
-      <td><button class="btn btn-danger" (click)="setLeagueId(leagues.id)" (click)="DeleteLeague()">Supprimer</button></td>
-    
+      <td><button class="btn btn-danger"  (click)="DeleteLeague(leagues.id)">Supprimer</button></td>
+      <td><button class="btn btn-danger" (click)="goToModifyLeague(leagues.id)">Modifier</button></td>
+
+ 
     </tr>
   </tbody>
 </table>

@@ -110,8 +110,17 @@ namespace TP2_6216948_PWS.Controllers
                 return NotFound();
             }
 
-            _context.Leagues.Remove(league);
-            await _context.SaveChangesAsync();
+            if (league.Teams.Count>0)
+            {
+                return NoContent();
+            }
+            else
+            {
+                _context.Leagues.Remove(league);
+                await _context.SaveChangesAsync();
+            }
+
+         
 
             return NoContent();
         }

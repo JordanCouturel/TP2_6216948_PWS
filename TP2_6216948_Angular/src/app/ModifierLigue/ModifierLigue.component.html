@@ -1,0 +1,22 @@
+<div style="margin-left: 50px; margin-bottom: 30px;" *ngIf="!ModifyLeagueActve" class="card-container">
+  <button  (click)="toggleFormVisibility()">Modifier une ligue</button>
+</div>
+
+<div style="margin-left: 50px;" *ngIf="ModifyLeagueActve" class="card-container">
+  <button (click)="toggleFormVisibility()">^ Modifier une ligue</button>
+
+  <div>
+      <form #formModifyLeague="ngForm" (ngSubmit)="onSubmitUpdate()">
+
+          <label for="leagueNom">Nom de la ligue :</label>
+          <br>
+          <input type="text" name="leagueNom" id="leagueNom" [(ngModel)]="ModifyLeagueNom" required>
+          <br>
+          <label for="leagueLogo">Logo de la ligue :</label>
+          <br>
+          <textarea name="leagueLogo" id="leagueLogo" [(ngModel)]="ModifyLeagueLogo" required style="width: 90%;"></textarea>
+          <br>
+          <button [disabled]="ModifyLeagueNom == ''" type="submit">Envoyer</button>
+      </form>
+  </div>
+</div>

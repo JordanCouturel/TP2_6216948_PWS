@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { League } from 'src/Models/League';
 import { Team } from 'src/Models/Team';
 
 @Injectable({
@@ -26,6 +28,18 @@ ngOnInit(): void {
 }
 
 GetTeamByID(leagueID:number){
+
+
+
+
+
+
+this.Teams=[];
+
+
+
+  this.http.get<any>('')
+
   this.http.get<any>('http://localhost:7161/api/Leagues/'+leagueID).subscribe(x=>{
 
   const TeamsFromResponse=x.teams
@@ -39,4 +53,15 @@ GetTeamByID(leagueID:number){
 
   })
 }
+
+
+updateLeague(league: League): Observable<League> {
+  const url = `http://localhost:7161/api/Leagues/${league.id}`;
+  return this.http.put<League>(url, league);
+}
+
+
+
+
+
 }

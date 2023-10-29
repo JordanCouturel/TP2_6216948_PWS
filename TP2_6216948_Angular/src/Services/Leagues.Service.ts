@@ -15,7 +15,7 @@ constructor(public http:HttpClient,private router:Router)
 Leagues:League[]=[];
 league?:League;
 
-
+Leagues2:League[]=[];
 
 
 
@@ -45,41 +45,47 @@ league?:League;
 
 
 
-  getSpecificLeague(number:number){
-    this.http.get<any>('http://localhost:7161/api/Leagues/'+ number );
-    
-  }
+  // getSpecificLeague(number:number){
+  //   this.http.get<any>('http://localhost:7161/api/Leagues/' + number).subscribe(x=>{
+  //     const leagueretournee=x;
+      
+  //     for(let f of leagueretournee ){
+  //       this.Leagues2[0].id=f.id,
+  //       this.Leagues2[0].logo=f.logo,
+  //       this.Leagues2[0].name=f.name,
+  //       this.Leagues2[0].team=f.team,
+  //       this.Leagues2[0].saisons=f.saisons
+  //     }
 
+      
+  //   });
+  //   console.log(this.Leagues2[0])
+  //   return this.Leagues2[0];
+  // }
+  getSpecificLeague(number: number): Observable<League> {
+    return this.http.get<League>('http://localhost:7161/api/Leagues/' + number);
+  }
 
   AddLeague(LeagueACreer:League): Observable<League>{
 
-    return this.http.post<League>('http://localhost:7161/api/Leagues', LeagueACreer)
+    return this.http.post<League>('http://localhost:7161/api/Leagues', LeagueACreer);
    
   }
 
 
 
-   DeleteLeague(leagueId:number){
-   
-
-     this.http.get<any>('http://localhost:7161/api/Leagues/'+ leagueId ).subscribe(x=>{
-      this.league= new League(x.id,x.name,x.logo,x.team,x.league);
-      console.log(this.league)
-    });
-
-    if(this.league?.team.length===0){
-      return this.http.delete<League>('http://localhost:7161/api/Leagues/' + leagueId)
-
-    }
-    else{
-      return this.router.navigate(['/ligues']);
-    }
-
-
+  DeleteLeague(leagueId: number): Observable<League> {
+    const url = 'http://localhost:7161/api/Leagues/' + leagueId;
+    return this.http.delete<League>(url);
   }
 
 
+updateLeague(league: League): Observable<League> {
+    const url = `http://localhost:7161/api/Leagues/${league.id}`;
+    return this.http.put<League>(url, league);
+  }
 
+  
 
 
 }
