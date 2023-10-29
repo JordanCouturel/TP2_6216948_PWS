@@ -53,31 +53,16 @@ league?:League;
 
   AddLeague(LeagueACreer:League): Observable<League>{
 
-    return this.http.post<League>('http://localhost:7161/api/Leagues', LeagueACreer)
+    return this.http.post<League>('http://localhost:7161/api/Leagues', LeagueACreer);
    
   }
 
 
 
-   DeleteLeague(leagueId:number){
-   
-
-     this.http.get<any>('http://localhost:7161/api/Leagues/'+ leagueId ).subscribe(x=>{
-      this.league= new League(x.id,x.name,x.logo,x.team,x.league);
-      console.log(this.league)
-    });
-
-    if(this.league?.team.length===0){
-      return this.http.delete<League>('http://localhost:7161/api/Leagues/' + leagueId)
-
-    }
-    else{
-      return this.router.navigate(['/ligues']);
-    }
-
-
+  DeleteLeague(leagueId: number): Observable<League> {
+    const url = 'http://localhost:7161/api/Leagues/' + leagueId;
+    return this.http.delete<League>(url);
   }
-
 
 
 

@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { LeaguesComponent } from './Leagues/Leagues.component';
 import { TeamsComponent } from './Teams/Teams.component';
 import { HomeComponent } from './Home/Home.component';
+import { ServiceRequetesService } from 'src/Services/Leagues.Service';
+import { TeamsService } from 'src/Services/Teams.service';
 
 
 
@@ -16,7 +18,8 @@ import { HomeComponent } from './Home/Home.component';
     AppComponent,
       LeaguesComponent,
       TeamsComponent,
-      HomeComponent
+      HomeComponent,
+      
    ],
   imports: [
     BrowserModule,
@@ -33,7 +36,7 @@ import { HomeComponent } from './Home/Home.component';
     ]),
 
   ],
-  providers: [],
+  providers: [ServiceRequetesService,TeamsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
