@@ -1,24 +1,63 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using TP2_6216948_PWS.Models;
 
 namespace TP2_6216948_PWS.Data
 {
-    public class TP2DbContext : DbContext
+    public class TP2DbContext : IdentityDbContext<User>
     {
         public TP2DbContext(DbContextOptions<TP2DbContext> options) : base(options) { }
 
 
-        public DbSet<Arena> Arenas { get; set; }
-        public DbSet<DG> DG { get; set; }
-        public DbSet<League> Leagues { get; set; }
-        public DbSet<Saison> Saisons { get; set; }
-        public DbSet<Team> Teams { get; set; }
-
+        public DbSet<Arena>? Arenas { get; set; }
+        public DbSet<DG>? DG { get; set; }
+        public DbSet<League>? Leagues { get; set; }
+        public DbSet<Saison>? Saisons { get; set; }
+        public DbSet<Team>? Teams { get; set; }
+        public DbSet<Villager>? Villagers { get; set; }
 
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Villager>().HasData(new Villager()
+            {
+                Id=1,
+                Nom="Jordan Couture",
+                
+            });
+
+            PasswordHasher<User> hasher = new PasswordHasher<User>();
+            User ul = new User
+            {
+                Id = "11111111-1111-1111-1111-11111111111",
+                UserName = "Jord98",
+                Email = "Jord98@mail.com",
+                NormalizedEmail = "JORD98@MAIL.COM",
+                NormalizedUserName = "JORD98"
+
+            };
+
+            ul.PasswordHash = hasher.HashPassword(ul, "Allo1!");
+            modelBuilder.Entity<User>().HasData(ul);
+
+
+            modelBuilder.Entity<Villager>()
+                .HasMany(c => c.UsersFriends)
+                .WithMany(v => v.VillagersFriends)
+                .UsingEntity(e =>
+                {
+                    e.HasData(new { UsersFriendsId = ul.Id, VillagersFriendsId = 1 });
+                });
+
+            
+
+
+
+
             // Seed des données pour la classe Bibliotheque
             modelBuilder.Entity<League>().HasData(
                 new League

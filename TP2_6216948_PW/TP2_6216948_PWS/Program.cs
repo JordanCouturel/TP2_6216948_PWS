@@ -1,6 +1,11 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 using TP2_6216948_PWS.Data;
+using TP2_6216948_PWS.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,14 +16,45 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TP2DbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TP2_6216948_BD") ?? throw new InvalidOperationException("Connection string 'TP2_6216948_BD' not found."))
     .UseLazyLoadingProxies());
+builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<TP2DbContext>();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.SaveToken = true;
+    options.RequireHttpsMetadata = false;
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateAudience = true,
+        ValidateIssuer = true,
+        ValidAudience = "http://localhost:4200/",
+        ValidIssuer = "http://localhost:7161/",
+
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretCode"]))
+    };
+});
+
+
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 5;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+});
+
+
 
 
 
 builder.Services.AddControllers();
-//builder.Services.AddControllersWithViews()
-//    .AddNewtonsoftJson(options =>
-//    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-//);
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -51,6 +87,8 @@ if (app.Environment.IsDevelopment())
 app.UseCors("Allow all");
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

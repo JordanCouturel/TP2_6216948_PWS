@@ -45,23 +45,7 @@ Leagues2:League[]=[];
 
 
 
-  // getSpecificLeague(number:number){
-  //   this.http.get<any>('http://localhost:7161/api/Leagues/' + number).subscribe(x=>{
-  //     const leagueretournee=x;
-      
-  //     for(let f of leagueretournee ){
-  //       this.Leagues2[0].id=f.id,
-  //       this.Leagues2[0].logo=f.logo,
-  //       this.Leagues2[0].name=f.name,
-  //       this.Leagues2[0].team=f.team,
-  //       this.Leagues2[0].saisons=f.saisons
-  //     }
-
-      
-  //   });
-  //   console.log(this.Leagues2[0])
-  //   return this.Leagues2[0];
-  // }
+  
   getSpecificLeague(number: number): Observable<League> {
     return this.http.get<League>('http://localhost:7161/api/Leagues/' + number);
   }
