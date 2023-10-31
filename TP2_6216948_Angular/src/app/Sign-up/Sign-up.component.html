@@ -1,0 +1,74 @@
+
+
+<div class="MainContainerSignup">
+
+   
+  <div *ngIf="!estconnecte">
+    <div style="margin-left: 50px; margin-bottom: 30px;" *ngIf="!registerActive" class="card-container">
+      <a > <button (click)="changeRegisterOnClick()">▼ S'inscrire</button></a>
+    </div>
+
+    <div style="margin-left: 30px; margin-bottom: 30px;"  *ngIf="registerActive" class="card-container">
+        <a ><button (click)="changeRegisterOnClick()">^ S'inscrire</button></a>
+
+        <div style="margin-left: 30px; margin-bottom: 30px;"  class='formulaireRegister'>
+            <form #formRegister="ngForm" (ngSubmit)="onSubmitRegister()">
+
+                <label for="username">Nom d'utilisateur :</label>
+                <br>
+                <input type="text" name="username" id="username" [(ngModel)]="username" required>
+                <br>
+                <label for="email">Courriel :</label>
+                <br>
+                <input type="text" name="email" id="email" [(ngModel)]="email" required>
+                <br>
+                <label for="password">Mot de passe :</label>
+                <br>
+                <input type="text" name="password" id="password" [(ngModel)]="password" required>
+                <br>
+                <label for="passwordConfirm">Confirmation du mot de passe :</label>
+                <br>
+                <input type="text" name="passwordConfirm" id="passwordConfirm" [(ngModel)]="passwordConfirm" required>
+                <br>
+                <button [disabled]="username == '' || email == '' || password == '' || passwordConfirm == ''" type="submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
+  </div>
+
+  <div *ngIf="estconnecte">
+    
+  </div>
+
+    <div *ngIf="!estconnecte">
+    <div style="margin-left: 50px; margin-bottom: 30px;"  *ngIf="!loginActive" class="card-container">
+      <a> <button (click)="changeLoginOnClick()">▼ Se connecter</button></a>
+    </div>
+ 
+    <div style="margin-left: 50px; margin-bottom: 30px;"  *ngIf="loginActive" class="card-container">
+       <a> <button (click)="changeLoginOnClick()">^ Se connecter</button></a>
+
+        <div style="margin-left: 50px; margin-bottom: 30px;"  class='formulaireRegister'>
+            <form #formRegister="ngForm" (ngSubmit)="onSubmitLogin(username,password)">
+
+                <label for="username">Nom d'utilisateur :</label>
+                <br>
+                <input type="text" name="username" id="username" [(ngModel)]="username" required>
+                <br>
+                <label for="password">Mot de passe :</label>
+                <br>
+                <input type="text" name="password" id="password" [(ngModel)]="password" required>
+                <br>
+                <button [disabled]="username == '' || password == ''" type="submit">Envoyer</button>
+            </form>
+        </div>
+    </div>
+  </div>
+
+  <div *ngIf="estconnecte">
+    <div style="margin-left: 50px; margin-bottom: 30px;"   class="card-container">
+      <a> <button (click)="SeDeconnecter()">Se déconnecter</button></a>
+    </div>
+  </div>
+
+</div>

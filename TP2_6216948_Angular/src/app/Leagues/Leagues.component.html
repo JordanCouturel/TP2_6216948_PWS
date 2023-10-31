@@ -1,5 +1,5 @@
 <div style="margin-left: 50px; margin-bottom: 30px;" *ngIf="!addLeagueActve" class="card-container">
-  <button  (click)="changeOnClick()">Ajouter une ligue</button>
+  <button  (click)="changeOnClick()">▼ Ajouter une ligue</button>
 </div>
 
 <div style="margin-left: 50px;" *ngIf="addLeagueActve" class="card-container">
@@ -37,6 +37,7 @@
       <th>Voir</th>
       <th>Supprimer</th>
       <th>Modifier</th>
+      <th>Détails</th>
 
     </tr>
   </thead>
@@ -51,7 +52,7 @@
         <td><button [routerLink]="['/Teams', leagues.id]" (click)="GetTeamsByID(leagues.id)" class="btn btn-danger">Voir les équipes</button></td>
       <td><button class="btn btn-danger"  (click)="DeleteLeague(leagues.id)">Supprimer</button></td>
       <td><button class="btn btn-danger" (click)="goToModifyLeague(leagues.id)">Modifier</button></td>
-
+      <td><button class="btn btn-danger" (click)="goToDetailsLeague(leagues.id)">Détails</button></td>
  
     </tr>
   </tbody>

@@ -1,0 +1,20 @@
+
+<h2>ID : {{league?.id}}</h2>
+<h1 style=" text-decoration: underline;"> {{league?.name}} </h1>
+
+<img style="height: 150px; width: 150px;" src="assets/Images/{{league?.logo}}" alt="Logo">
+
+
+<br>
+<br><br>
+<h2 style=" text-decoration: underline;">Les équipes</h2>
+<div *ngFor="let team of service2.Teams">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{team.name}}</h5>
+      <p class="card-text">ID:  {{team.id}}</p>
+      <p class="card-text">Ville: {{team.ville}} </p>
+      <p class="card-text">Commanditaire: {{team.commanditaire}} </p>
+    </div>
+  </div>
+</div>

@@ -11,16 +11,21 @@ import { HomeComponent } from './Home/Home.component';
 import { ServiceRequetesService } from 'src/Services/Leagues.Service';
 import { TeamsService } from 'src/Services/Teams.service';
 import { ModifierLigueComponent } from './ModifierLigue/ModifierLigue.component';
+import { DetailsParentComponent } from './DetailsParent/DetailsParent.component';
+import { SignupComponent } from './Sign-up/Sign-up.component';
+import { AuthInterceptorInterceptor } from './auth-interceptor.interceptor';
 
 
 
 @NgModule({
-  declarations: [					
+  declarations: [							
     AppComponent,
       LeaguesComponent,
       TeamsComponent,
       HomeComponent,
-      ModifierLigueComponent
+      ModifierLigueComponent,
+      DetailsParentComponent,
+      SignupComponent,
    ],
   imports: [
     BrowserModule,
@@ -33,12 +38,21 @@ import { ModifierLigueComponent } from './ModifierLigue/ModifierLigue.component'
       {path:'ligues',component:LeaguesComponent},
       {path:'Teams/:leagueId',component:TeamsComponent},
       { path: 'ModifierLigue/:id', component: ModifierLigueComponent },
+      { path: 'DetailsParent/:id', component: DetailsParentComponent },
     
 
     ]),
 
   ],
-  providers: [ServiceRequetesService,TeamsService],
+  providers: [
+    ServiceRequetesService, // Other service providers
+    TeamsService, // Other service providers
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorInterceptor, // Add your interceptor class here
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

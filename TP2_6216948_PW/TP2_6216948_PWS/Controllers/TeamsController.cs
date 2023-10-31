@@ -32,6 +32,7 @@ namespace TP2_6216948_PWS.Controllers
             return await _context.Teams.ToListAsync();
         }
 
+
         // GET: api/Teams/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Team>> GetTeam(int id)

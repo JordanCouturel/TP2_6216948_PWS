@@ -24,7 +24,7 @@ export class ModifierLigueComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       const id = params.get('id');
-      this.leagueId = id !== null ? +id : 0; // Convert to number or set to 0 if null
+      this.leagueId = id !== null ? +id : 0; 
     });
 
     console.log(this.leagueId)
@@ -42,10 +42,10 @@ export class ModifierLigueComponent implements OnInit {
   
           this.service.updateLeague(this.leagueAmodifier).subscribe(
             (updatedLeague) => {
-              console.log('League updated successfully:', updatedLeague);
+              console.log('La ligue a été modifiée avec succès:', updatedLeague);
             },
             (error) => {
-              console.error('Error updating league:', error);
+              console.error('Une erreur est survenue lors de la modification de la ligue:', error);
             }
           );
   
@@ -53,11 +53,11 @@ export class ModifierLigueComponent implements OnInit {
           this.ModifyLeagueLogo = '';
           this.ModifyLeagueActve = false;
         } else {
-          console.error('League with ID ' + this.leagueId + ' not found.');
+          console.error('La ligue avec ID ' + this.leagueId + ' a pas été trouvée.');
         }
       },
       (error) => {
-        console.error('Error fetching league data:', error);
+        console.error('Une erreur est survenue lors de la recuperationd des données:', error);
       }
     );
   }

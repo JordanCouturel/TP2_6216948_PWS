@@ -95,7 +95,11 @@ GetTeamsByID(leagueID:number){
     this.router.navigate(['ModifierLigue', id]);
   }
 
+  goToDetailsLeague(id:number):void{
+    this.router.navigate(['DetailsParent', id]);
+  }
+  }
 
 
 
-}
+
