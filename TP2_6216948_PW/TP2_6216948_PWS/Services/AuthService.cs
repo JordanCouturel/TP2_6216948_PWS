@@ -64,7 +64,6 @@ namespace TP2_6216948_PWS.Services
             }
             authClaims.Add(new Claim(ClaimTypes.NameIdentifier,user.Id));
             JwtSecurityToken token = GenerateToken(authClaims);
-            //var tokenhandler = new JwtSecurityTokenHandler().WriteToken(token);
             return token;
              
         }

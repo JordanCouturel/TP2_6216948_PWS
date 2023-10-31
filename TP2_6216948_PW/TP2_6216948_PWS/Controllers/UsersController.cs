@@ -106,13 +106,7 @@ namespace TP2_6216948_PWS.Controllers
         {
             try
             {
-                //if (!ModelState.IsValid)
-                //    return BadRequest("Invalid payload");
-                //var (status, message) = await _authService.Login(model);
-                //if (status == 0)
-                //    return BadRequest(message);
-
-                //return Ok(message);
+              
 
                 JwtSecurityToken token = _authService.Login(model).Result;
                 

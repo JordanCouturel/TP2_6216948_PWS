@@ -72,6 +72,8 @@ export class SignupComponent implements OnInit {
       password: this.password
     };
 
+    
+
     // Make a POST request to the login endpoint
     this.http.post<any>('http://localhost:7161/api/Users/Login', user ).subscribe(
       (response) => {

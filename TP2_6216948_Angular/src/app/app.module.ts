@@ -13,6 +13,7 @@ import { TeamsService } from 'src/Services/Teams.service';
 import { ModifierLigueComponent } from './ModifierLigue/ModifierLigue.component';
 import { DetailsParentComponent } from './DetailsParent/DetailsParent.component';
 import { SignupComponent } from './Sign-up/Sign-up.component';
+import { AuthInterceptorInterceptor } from './auth-interceptor.interceptor';
 
 
 
@@ -43,7 +44,15 @@ import { SignupComponent } from './Sign-up/Sign-up.component';
     ]),
 
   ],
-  providers: [ServiceRequetesService,TeamsService],
+  providers: [
+    ServiceRequetesService, // Other service providers
+    TeamsService, // Other service providers
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorInterceptor, // Add your interceptor class here
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
