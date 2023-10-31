@@ -14,10 +14,11 @@ namespace TP2_6216948_PWS.Controllers
     public class UsersController : ControllerBase
     {
         UserManager<User> userManager;
-
-        public UsersController(UserManager<User> userManager)
+        IConfiguration config;
+        public UsersController(UserManager<User> userManager,IConfiguration configuration)
         {
             this.userManager = userManager;
+            this.config = configuration;
         }
 
         [HttpPost]
@@ -50,40 +51,40 @@ namespace TP2_6216948_PWS.Controllers
 
 
 
-        //[HttpPost]
-        //public async Task<ActionResult> Login(LoginDTO login)
-        //{
-        //    User user = await userManager.FindByNameAsync(login.Username);
-        //    if (user != null && await userManager.CheckPasswordAsync(user, login.Password))
-        //    {
-        //        IList<string> roles = await userManager.GetRolesAsync(user);
-        //        List<Claim> authClaims = new List<Claim>();
-        //        foreach (string role in roles)
-        //        {
-        //            authClaims.Add(new Claim(ClaimTypes.Role, role));
-        //        }
-        //        authClaims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
-        //        SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Salut"));
-        //        JwtSecurityToken token = new JwtSecurityToken(
-        //            issuer: "http://localhost:7161/",
-        //            audience: "http://localhost:4200/",
-        //            claims: authClaims,
-        //            expires: DateTime.Now.AddMinutes(30),
-        //            signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
-        //            );
+        [HttpPost]
+        public async Task<ActionResult> Login(LoginDTO login)
+        {
+            User user = await userManager.FindByNameAsync(login.Username);
+            if (user != null && await userManager.CheckPasswordAsync(user, login.Password))
+            {
+                IList<string> roles = await userManager.GetRolesAsync(user);
+                List<Claim> authClaims = new List<Claim>();
+                foreach (string role in roles)
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, role));
+                }
+                authClaims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));
+                SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Iciilyaunecleassezlonguepournepasgenererderreur"));
+                JwtSecurityToken token = new JwtSecurityToken(
+                    issuer: "http://localhost:7161/",
+                    audience: "http://localhost:4200/",
+                    claims: authClaims,
+                    expires: DateTime.Now.AddMinutes(30),
+                    signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
+                    );
 
-        //        return Ok(new
-        //        {
-        //            token = new JwtSecurityTokenHandler().WriteToken(token),
-        //            validTo = token.ValidTo
-        //        });
-        //    }
-        //    else
-        //    {
-        //        return StatusCode(StatusCodes.Status400BadRequest,
-        //        new { Message = "Le nom d'utilisateur ou le mot de passe est invalide." });
-        //    }
-        //}
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    validTo = token.ValidTo
+                });
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status400BadRequest,
+                new { Message = "Le nom d'utilisateur ou le mot de passe est invalide." });
+            }
+        }
 
 
 

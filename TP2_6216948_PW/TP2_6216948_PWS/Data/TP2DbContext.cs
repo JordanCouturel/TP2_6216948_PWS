@@ -37,7 +37,9 @@ namespace TP2_6216948_PWS.Data
                 UserName = "Jord98",
                 Email = "Jord98@mail.com",
                 NormalizedEmail = "JORD98@MAIL.COM",
-                NormalizedUserName = "JORD98"
+                NormalizedUserName = "JORD98",
+                
+                
 
             };
 

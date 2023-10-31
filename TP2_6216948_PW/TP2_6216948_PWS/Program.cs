@@ -1,22 +1,31 @@
+using Humanizer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
 using System.Text;
 using TP2_6216948_PWS.Data;
 using TP2_6216948_PWS.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
-
-
 // Add services to the container.
 builder.Services.AddDbContext<TP2DbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TP2_6216948_BD") ?? throw new InvalidOperationException("Connection string 'TP2_6216948_BD' not found."))
     .UseLazyLoadingProxies());
+
 builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<TP2DbContext>();
+
+// Create Identity roles
+builder.Services.ConfigureServices((context, services) =>
+{
+    services.BuildServiceProvider().GetRequiredService<RoleManager<IdentityRole>>().CreateAsync(new IdentityRole("Admin")).Wait();
+    services.BuildServiceProvider().GetRequiredService<RoleManager<IdentityRole>>().CreateAsync(new IdentityRole("User")).Wait();
+    services.BuildServiceProvider().GetRequiredService<RoleManager<IdentityRole>>().CreateAsync(new IdentityRole("Manager")).Wait();
+});
 
 builder.Services.AddAuthentication(options =>
 {
@@ -33,12 +42,9 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuer = true,
         ValidAudience = "http://localhost:4200/",
         ValidIssuer = "http://localhost:7161/",
-
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:SecretCode"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Iciilyaunecleassezlonguepournepasgenererderreur"))
     };
 });
-
-
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -49,17 +55,11 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireNonAlphanumeric = false;
 });
 
-
-
-
-
 builder.Services.AddControllers();
-
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 
 builder.Services.AddCors(options =>
 {
@@ -69,8 +69,6 @@ builder.Services.AddCors(options =>
         builder.AllowAnyMethod();
         builder.AllowAnyHeader();
     });
-
-
 });
 
 var app = builder.Build();
@@ -83,15 +81,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TP2_6216948_BD"));
 }
 
-
 app.UseCors("Allow all");
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();
