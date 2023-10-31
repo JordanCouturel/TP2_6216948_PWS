@@ -766,15 +766,15 @@ namespace TP2_6216948_PWS.Migrations
                         {
                             Id = "11111111-1111-1111-1111-11111111111",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c5677340-7ad4-44c8-8d05-a583f931b02a",
+                            ConcurrencyStamp = "a38ad995-dcb0-4edc-9d99-039f85bbf9ce",
                             Email = "Jord98@mail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "JORD98@MAIL.COM",
                             NormalizedUserName = "JORD98",
-                            PasswordHash = "AQAAAAEAACcQAAAAEM4Ag3aUuqJbRgbBi6ok7QIPiVVj/n3q/iq9ttMUeyIS6SnwllArrGWE7gDzRek0YQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOvJZVkg8OMiKVf2bxJ0Aa3P/OPriHo1Um6JbzWxQeo2DITXMIgKPQsUvgzzmgdFeg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f2e3823a-78d8-41c9-bf39-7bd061a893f4",
+                            SecurityStamp = "e5c4a60c-e102-48d4-b5fe-b2d0fe81c330",
                             TwoFactorEnabled = false,
                             UserName = "Jord98"
                         });
@@ -817,13 +817,6 @@ namespace TP2_6216948_PWS.Migrations
                     b.HasIndex("VillagersFriendsId");
 
                     b.ToTable("UserVillager");
-
-                    b.HasData(
-                        new
-                        {
-                            UsersFriendsId = "11111111-1111-1111-1111-11111111111",
-                            VillagersFriendsId = 1
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

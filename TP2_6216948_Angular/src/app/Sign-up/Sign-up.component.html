@@ -3,9 +3,9 @@
 <div class="MainContainerSignup">
 
    
-
+  <div *ngIf="!estconnecte">
     <div style="margin-left: 50px; margin-bottom: 30px;" *ngIf="!registerActive" class="card-container">
-      <a > <button (click)="changeRegisterOnClick()">+ S'inscrire</button></a>
+      <a > <button (click)="changeRegisterOnClick()">▼ S'inscrire</button></a>
     </div>
 
     <div style="margin-left: 30px; margin-bottom: 30px;"  *ngIf="registerActive" class="card-container">
@@ -34,13 +34,19 @@
             </form>
         </div>
     </div>
+  </div>
 
+  <div *ngIf="estconnecte">
+    
+  </div>
+
+    <div *ngIf="!estconnecte">
     <div style="margin-left: 50px; margin-bottom: 30px;"  *ngIf="!loginActive" class="card-container">
-      <a> <button (click)="changeLoginOnClick()">+ S'authentifier</button></a>
+      <a> <button (click)="changeLoginOnClick()">▼ Se connecter</button></a>
     </div>
-
+ 
     <div style="margin-left: 50px; margin-bottom: 30px;"  *ngIf="loginActive" class="card-container">
-       <a> <button (click)="changeLoginOnClick()">^ S'authentifier</button></a>
+       <a> <button (click)="changeLoginOnClick()">^ Se connecter</button></a>
 
         <div style="margin-left: 50px; margin-bottom: 30px;"  class='formulaireRegister'>
             <form #formRegister="ngForm" (ngSubmit)="onSubmitLogin(username,password)">
@@ -57,4 +63,12 @@
             </form>
         </div>
     </div>
+  </div>
+
+  <div *ngIf="estconnecte">
+    <div style="margin-left: 50px; margin-bottom: 30px;"   class="card-container">
+      <a> <button (click)="SeDeconnecter()">Se déconnecter</button></a>
+    </div>
+  </div>
+
 </div>

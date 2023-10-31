@@ -15,6 +15,7 @@ export class SignupComponent implements OnInit {
   password: string = '';
   passwordConfirm: string = '';
 
+  estconnecte:boolean=false;
   loginActive: boolean = false;
 
   constructor(private http: HttpClient) {} // Inject HttpClient into the component
@@ -31,7 +32,6 @@ export class SignupComponent implements OnInit {
   }
 
   async onSubmitRegister() {
-  
 
     const user = new User(0, this.username, this.email, this.password, this.passwordConfirm);
 
@@ -44,10 +44,11 @@ export class SignupComponent implements OnInit {
 
     };
 
-    this.http.post('http://localhost:7161/api/Users/Register', registrationData )
+    this.http.post('http://localhost:7161/api/Users/Register', registrationData)
       .subscribe(
         response => {
           console.log('Registration successful:', response);
+
           
         },
         error => {
@@ -67,8 +68,8 @@ export class SignupComponent implements OnInit {
 
   onSubmitLogin(username: string, password: string) {
     const user = {
-      username: username,
-      password: password
+      username: this.username,
+      password: this.password
     };
 
     // Make a POST request to the login endpoint
@@ -76,10 +77,10 @@ export class SignupComponent implements OnInit {
       (response) => {
         // Handle the successful login response here
         console.log('Login successful:', response);
-
         const token = response.token;
         console.log(token);
-        localStorage.setItem("authToken",token)
+        sessionStorage.setItem("authToken",token);
+        this.estconnecte=true;
       },
       (error) => {
         // Handle login error here
@@ -88,13 +89,14 @@ export class SignupComponent implements OnInit {
     );
 
     this.loginActive=false;
-
+    
   }
 
 
 
   SeDeconnecter(){
-    localStorage.setItem("authToken", "");
+    sessionStorage.removeItem("authToken");
+    this.estconnecte=false;
   }
 
 }

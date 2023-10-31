@@ -315,7 +315,7 @@ namespace TP2_6216948_PWS.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "11111111-1111-1111-1111-11111111111", 0, "c5677340-7ad4-44c8-8d05-a583f931b02a", "Jord98@mail.com", false, false, null, "JORD98@MAIL.COM", "JORD98", "AQAAAAEAACcQAAAAEM4Ag3aUuqJbRgbBi6ok7QIPiVVj/n3q/iq9ttMUeyIS6SnwllArrGWE7gDzRek0YQ==", null, false, "f2e3823a-78d8-41c9-bf39-7bd061a893f4", false, "Jord98" });
+                values: new object[] { "11111111-1111-1111-1111-11111111111", 0, "a38ad995-dcb0-4edc-9d99-039f85bbf9ce", "Jord98@mail.com", false, false, null, "JORD98@MAIL.COM", "JORD98", "AQAAAAEAACcQAAAAEOvJZVkg8OMiKVf2bxJ0Aa3P/OPriHo1Um6JbzWxQeo2DITXMIgKPQsUvgzzmgdFeg==", null, false, "e5c4a60c-e102-48d4-b5fe-b2d0fe81c330", false, "Jord98" });
 
             migrationBuilder.InsertData(
                 table: "DG",
@@ -388,11 +388,6 @@ namespace TP2_6216948_PWS.Migrations
                     { 12, 12, "Sports aux puces", 12, 3, "Océanic", "Rimouski" },
                     { 13, 13, "Sports aux poux", 13, 3, "Drakkar", " Baie-Comeau" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "UserVillager",
-                columns: new[] { "UsersFriendsId", "VillagersFriendsId" },
-                values: new object[] { "11111111-1111-1111-1111-11111111111", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

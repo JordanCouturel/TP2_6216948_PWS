@@ -2,49 +2,57 @@ using Humanizer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System;
+using System.Data;
 using System.Text;
 using TP2_6216948_PWS.Data;
 using TP2_6216948_PWS.Models;
+using TP2_6216948_PWS.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+
+
 
 // Add services to the container.
 builder.Services.AddDbContext<TP2DbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TP2_6216948_BD") ?? throw new InvalidOperationException("Connection string 'TP2_6216948_BD' not found."))
     .UseLazyLoadingProxies());
-
 builder.Services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<TP2DbContext>();
 
-// Create Identity roles
-builder.Services.ConfigureServices((context, services) =>
-{
-    services.BuildServiceProvider().GetRequiredService<RoleManager<IdentityRole>>().CreateAsync(new IdentityRole("Admin")).Wait();
-    services.BuildServiceProvider().GetRequiredService<RoleManager<IdentityRole>>().CreateAsync(new IdentityRole("User")).Wait();
-    services.BuildServiceProvider().GetRequiredService<RoleManager<IdentityRole>>().CreateAsync(new IdentityRole("Manager")).Wait();
-});
 
+// Adding Authentication  
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.SaveToken = true;
-    options.RequireHttpsMetadata = false;
-    options.TokenValidationParameters = new TokenValidationParameters()
-    {
-        ValidateAudience = true,
-        ValidateIssuer = true,
-        ValidAudience = "http://localhost:4200/",
-        ValidIssuer = "http://localhost:7161/",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Iciilyaunecleassezlonguepournepasgenererderreur"))
-    };
-});
+})
+
+// Adding Jwt Bearer  
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = builder.Configuration["JWT:ValidAudience"],
+                    ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
+                    ClockSkew = TimeSpan.Zero,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
+                };
+            });
+
+
+builder.Services.AddScoped<IAuthService,AuthService>();
+
+
+
+
 
 builder.Services.Configure<IdentityOptions>(options =>
 {
@@ -55,11 +63,17 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireNonAlphanumeric = false;
 });
 
+
+
+
+
 builder.Services.AddControllers();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 builder.Services.AddCors(options =>
 {
@@ -69,9 +83,17 @@ builder.Services.AddCors(options =>
         builder.AllowAnyMethod();
         builder.AllowAnyHeader();
     });
+
+
 });
 
+
+
 var app = builder.Build();
+
+
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -81,10 +103,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TP2_6216948_BD"));
 }
 
+
 app.UseCors("Allow all");
 
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
+
 app.UseAuthorization();
+
 app.MapControllers();
+
 app.Run();

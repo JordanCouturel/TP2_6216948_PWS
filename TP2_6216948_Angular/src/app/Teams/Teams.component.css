@@ -1,0 +1,22 @@
+td{
+    
+    text-align: center; /* Horizontally center content */
+    vertical-align: middle; /* Vertically center content */
+    height: 100%; /* Ensure cell takes up the full height of the row */
+    text-align: center; /* Horizontally center content */
+    vertical-align: middle; /* Vertically center content */
+  
+}
+
+table {
+    width: 100%; /* Make the table fill the container */
+    height: 100%; /* Make the table fill the container */
+    table-layout: fixed; /* Ensure table cells are evenly distributed */
+    border-collapse: collapse; /* Remove spacing between cells */
+  }
+  th{
+    text-align: center; /* Horizontally center content */
+    vertical-align: middle; /* Vertically center content */
+    text-align: center; /* Horizontally center content */
+    vertical-align: middle; /* Vertically center content */
+}

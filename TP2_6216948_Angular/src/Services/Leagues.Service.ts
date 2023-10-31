@@ -16,7 +16,7 @@ Leagues:League[]=[];
 league?:League;
 
 Leagues2:League[]=[];
-
+loginActve:boolean=false;
 
 
  ngOnInit(): void {
@@ -69,7 +69,8 @@ updateLeague(league: League): Observable<League> {
     return this.http.put<League>(url, league);
   }
 
-  
+ 
+
 
 
 }

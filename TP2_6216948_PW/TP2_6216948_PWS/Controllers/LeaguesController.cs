@@ -13,6 +13,7 @@ namespace TP2_6216948_PWS.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class LeaguesController : ControllerBase
     {
         private readonly TP2DbContext _context;
@@ -36,6 +37,7 @@ namespace TP2_6216948_PWS.Controllers
 
         // GET: api/Leagues/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<League>> GetLeague(int id)
         {
           if (_context.Leagues == null)
@@ -55,7 +57,7 @@ namespace TP2_6216948_PWS.Controllers
         // PUT: api/Leagues/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-       
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> PutLeague(int id, League league)
         {
             if (id != league.Id)
@@ -87,6 +89,7 @@ namespace TP2_6216948_PWS.Controllers
         // POST: api/Leagues
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<League>> PostLeague(League league)
         {
           if (_context.Leagues == null)
@@ -101,6 +104,7 @@ namespace TP2_6216948_PWS.Controllers
 
         // DELETE: api/Leagues/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteLeague(int id)
         {
             if (_context.Leagues == null)
@@ -128,7 +132,7 @@ namespace TP2_6216948_PWS.Controllers
 
             return NoContent();
         }
-
+        [AllowAnonymous]
         private bool LeagueExists(int id)
         {
             return (_context.Leagues?.Any(e => e.Id == id)).GetValueOrDefault();

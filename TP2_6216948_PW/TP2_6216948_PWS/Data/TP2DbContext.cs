@@ -47,16 +47,6 @@ namespace TP2_6216948_PWS.Data
             modelBuilder.Entity<User>().HasData(ul);
 
 
-            modelBuilder.Entity<Villager>()
-                .HasMany(c => c.UsersFriends)
-                .WithMany(v => v.VillagersFriends)
-                .UsingEntity(e =>
-                {
-                    e.HasData(new { UsersFriendsId = ul.Id, VillagersFriendsId = 1 });
-                });
-
-            
-
 
 
 
