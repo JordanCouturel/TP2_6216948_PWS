@@ -12,7 +12,7 @@ using TP2_6216948_PWS.Data;
 namespace TP2_6216948_PWS.Migrations
 {
     [DbContext(typeof(TP2DbContext))]
-    [Migration("20231031071515_tout")]
+    [Migration("20231101033739_tout")]
     partial class tout
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -762,24 +762,6 @@ namespace TP2_6216948_PWS.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "11111111-1111-1111-1111-11111111111",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "a38ad995-dcb0-4edc-9d99-039f85bbf9ce",
-                            Email = "Jord98@mail.com",
-                            EmailConfirmed = false,
-                            LockoutEnabled = false,
-                            NormalizedEmail = "JORD98@MAIL.COM",
-                            NormalizedUserName = "JORD98",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOvJZVkg8OMiKVf2bxJ0Aa3P/OPriHo1Um6JbzWxQeo2DITXMIgKPQsUvgzzmgdFeg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "e5c4a60c-e102-48d4-b5fe-b2d0fe81c330",
-                            TwoFactorEnabled = false,
-                            UserName = "Jord98"
-                        });
                 });
 
             modelBuilder.Entity("TP2_6216948_PWS.Models.Villager", b =>
@@ -797,13 +779,6 @@ namespace TP2_6216948_PWS.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Villagers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Nom = "Jordan Couture"
-                        });
                 });
 
             modelBuilder.Entity("UserVillager", b =>

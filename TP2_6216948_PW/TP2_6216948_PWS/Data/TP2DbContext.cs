@@ -23,29 +23,7 @@ namespace TP2_6216948_PWS.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<Villager>().HasData(new Villager()
-            {
-                Id=1,
-                Nom="Jordan Couture",
-                
-            });
-
-            PasswordHasher<User> hasher = new PasswordHasher<User>();
-            User ul = new User
-            {
-                Id = "11111111-1111-1111-1111-11111111111",
-                UserName = "Jord98",
-                Email = "Jord98@mail.com",
-                NormalizedEmail = "JORD98@MAIL.COM",
-                NormalizedUserName = "JORD98",
-                
-                
-
-            };
-
-            ul.PasswordHash = hasher.HashPassword(ul, "Allo1!");
-            modelBuilder.Entity<User>().HasData(ul);
-
+         
 
 
 

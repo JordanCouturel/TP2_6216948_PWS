@@ -313,11 +313,6 @@ namespace TP2_6216948_PWS.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "11111111-1111-1111-1111-11111111111", 0, "a38ad995-dcb0-4edc-9d99-039f85bbf9ce", "Jord98@mail.com", false, false, null, "JORD98@MAIL.COM", "JORD98", "AQAAAAEAACcQAAAAEOvJZVkg8OMiKVf2bxJ0Aa3P/OPriHo1Um6JbzWxQeo2DITXMIgKPQsUvgzzmgdFeg==", null, false, "e5c4a60c-e102-48d4-b5fe-b2d0fe81c330", false, "Jord98" });
-
-            migrationBuilder.InsertData(
                 table: "DG",
                 columns: new[] { "ID", "Age", "Name" },
                 values: new object[,]
@@ -347,11 +342,6 @@ namespace TP2_6216948_PWS.Migrations
                     { 3, "lhjmq.png", "Ligue de hockey junior majeur du Québec " },
                     { 4, "photoinexistante.png", "Ligue de hockey sans equipes" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Villagers",
-                columns: new[] { "Id", "Nom" },
-                values: new object[] { 1, "Jordan Couture" });
 
             migrationBuilder.InsertData(
                 table: "Saisons",

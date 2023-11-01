@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using System.Data;
 using System.Text;
 using TP2_6216948_PWS.Data;
+using TP2_6216948_PWS.DbInitialiser;
 using TP2_6216948_PWS.Models;
 using TP2_6216948_PWS.Services;
 
@@ -49,7 +50,7 @@ builder.Services.AddAuthentication(options =>
 
 
 builder.Services.AddScoped<IAuthService,AuthService>();
-
+builder.Services.AddScoped<IdBInitialiser, DbInitialiser>();
 
 
 
@@ -109,7 +110,17 @@ app.UseCors("Allow all");
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
+void SeedDatabase()
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbInitializer = scope.ServiceProvider.GetRequiredService<IdBInitialiser>();
+        dbInitializer.Initialize();
 
+    }
+}
+
+SeedDatabase();
 app.UseAuthorization();
 
 app.MapControllers();
