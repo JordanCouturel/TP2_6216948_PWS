@@ -5,6 +5,7 @@ import { ServiceRequetesService } from 'src/Services/Leagues.Service';
 import { TeamsService } from 'src/Services/Teams.service';
 import { Inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Team } from 'src/Models/Team';
 @Component({
   selector: 'app-Leagues',
   templateUrl: './Leagues.component.html',
@@ -23,14 +24,17 @@ LeagueAcreer?:League;
 addLeagueNom:string="";
 addLeagueLogo:string="";
 
+filteredTeams:Team[]=[];
 
-
+agemin:number=0;
+agemax:number=0;
 
 leagueId?: number;
 league: League | null = null;
 
 
 ngOnInit(): void {
+  this.service2.getteamsfilteredbyteam(20,40);
   }
   
      GetAllLeagues(){
@@ -98,8 +102,26 @@ GetTeamsByID(leagueID:number){
   goToDetailsLeague(id:number):void{
     this.router.navigate(['DetailsParent', id]);
   }
+
+
+
+
+  loadTeamsFilteredByAge(): void {
+       this.service2.getteamsfilteredbyteam(this.agemin, this.agemax).subscribe(teams => { 
+        console.log(teams);
+           this.filteredTeams = teams; 
+            });
+          
+          }
+
+     
+
+
   }
 
 
 
+    
+
+  
 

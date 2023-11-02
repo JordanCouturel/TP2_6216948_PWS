@@ -12,6 +12,9 @@ export class TeamsService {
 
 constructor(public http:HttpClient, private route:ActivatedRoute) { }
 
+FilteredTeams:[]=[];
+
+
 Teams:Team[]=[]
 leagueid:number|null=null;
 
@@ -54,6 +57,8 @@ updateLeague(league: League): Observable<League> {
 
 
 
-
+getteamsfilteredbyteam(agemin:number,agemax:number): Observable<any> {
+  return this.http.get(`http://localhost:7161/api/DGs/FilteredByage?agemin=${agemin}&agemax=${agemax}`);
+}
 
 }
