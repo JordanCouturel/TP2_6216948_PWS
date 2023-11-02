@@ -6,6 +6,7 @@ import { TeamsService } from 'src/Services/Teams.service';
 import { Inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Team } from 'src/Models/Team';
+import { DG } from 'src/Models/DG';
 @Component({
   selector: 'app-Leagues',
   templateUrl: './Leagues.component.html',
@@ -24,7 +25,7 @@ LeagueAcreer?:League;
 addLeagueNom:string="";
 addLeagueLogo:string="";
 
-filteredTeams:Team[]=[];
+filteredDGs:DG[]=[];
 
 agemin:number=0;
 agemax:number=0;
@@ -34,7 +35,6 @@ league: League | null = null;
 
 
 ngOnInit(): void {
-  this.service2.getteamsfilteredbyteam(20,40);
   }
   
      GetAllLeagues(){
@@ -106,10 +106,16 @@ GetTeamsByID(leagueID:number){
 
 
 
-  loadTeamsFilteredByAge(): void {
-       this.service2.getteamsfilteredbyteam(this.agemin, this.agemax).subscribe(teams => { 
-        console.log(teams);
-           this.filteredTeams = teams; 
+  loadDGsFilteredByAge(): void {
+       this.service2.getDGsfilteredbyAge(this.agemin, this.agemax).subscribe(DGs => { 
+        console.log(DGs);
+
+for(let x of DGs)
+{
+  this.filteredDGs.push(new DG(x.id,x.name,x.age))
+}
+console.log(this.filteredDGs);
+
             });
           
           }

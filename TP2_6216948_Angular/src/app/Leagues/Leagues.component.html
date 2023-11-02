@@ -61,31 +61,4 @@
 
 
 
-<form (submit)="loadTeamsFilteredByAge()"> 
-   <label for="agemin">Âge minimum:</label>
-     <input type="number" [(ngModel)]="agemin" name="agemin"> 
-       <label for="agemax">Âge maximum:</label> 
-        <input type="number" [(ngModel)]="agemax" name="agemax"> 
-          <button type="submit">Charger les équipes</button>
-        </form>
-
-
-        
-<div *ngIf="filteredTeams!=null">
-  <div *ngFor="let team of filteredTeams">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{team.name}}</h5>
-        <p class="card-text">ID:  {{team.id}}</p>
-        <p class="card-text">Ville: {{team.ville}} </p>
-        <p class="card-text">Commanditaire: {{team.commanditaire}} </p>
-      </div>
-    </div>
-  </div>
-  </div>
-  
-  <div *ngIf="filteredTeams==null">
-        <h1 style="color: red;">Il n'y a aucun DG dans cette tranche d'age</h1>
-  </div>
-
 

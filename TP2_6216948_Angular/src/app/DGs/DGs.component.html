@@ -1,0 +1,26 @@
+<form (submit)="loadDGsFilteredByAge()"> 
+  <label for="agemin">Âge minimum:</label>
+    <input type="number" [(ngModel)]="agemin" name="agemin"> 
+      <label for="agemax">Âge maximum:</label> 
+       <input type="number" [(ngModel)]="agemax" name="agemax"> 
+         <button type="submit">Charger les DG</button>
+       </form>
+
+
+       
+<div *ngIf="filteredDGs!=null">
+ <div *ngFor="let dg of filteredDGs">
+   <div class="card">
+     <div class="card-body">
+       <h5 class="card-title">{{dg.name}}</h5>
+       <p class="card-text">ID:  {{dg.id}}</p>
+       <p class="card-text">Age: {{dg.age}} </p>
+     </div>
+   </div>
+ </div>
+ </div>
+ 
+ <div *ngIf="filteredDGs==null">
+       <h1 style="color: red;">Il n'y a aucun DG dans cette tranche d'age</h1>
+ </div>
+
