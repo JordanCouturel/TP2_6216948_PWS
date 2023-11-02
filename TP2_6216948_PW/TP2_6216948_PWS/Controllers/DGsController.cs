@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using TP2_6216948_PWS.Data;
 using TP2_6216948_PWS.Models;
 
@@ -80,6 +82,19 @@ namespace TP2_6216948_PWS.Controllers
 
             return NoContent();
         }
+
+
+        [HttpGet("FilteredByage")]
+        public async Task<ActionResult<IEnumerable<DG>>> GetDGsFilteredByAge([FromQuery]int agemin, [FromQuery]int agemax)
+        {
+            if (_context.DG == null)
+            {
+                return NotFound();
+            }
+            return await _context.DG.Where(x => x.Age >= agemin && x.Age <= agemax).ToListAsync();
+        }
+
+
 
         // POST: api/DGs
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

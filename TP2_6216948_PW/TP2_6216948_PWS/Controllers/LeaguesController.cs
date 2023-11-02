@@ -134,6 +134,19 @@ namespace TP2_6216948_PWS.Controllers
 
             return NoContent();
         }
+
+
+  
+
+
+
+
+
+
+
+
+
+
         [AllowAnonymous]
         private bool LeagueExists(int id)
         {
